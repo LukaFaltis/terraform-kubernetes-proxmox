@@ -85,3 +85,26 @@ resource "proxmox_virtual_environment_vm" "k8s_worker_01" {
     }
   }
 }
+
+--- a/virtual_machines.tf
++++ b/virtual_machines.tf
+@@ -34,9 +34,6 @@ resource "proxmox_virtual_environment_vm" "k8s_cp_01" {
+   }
+
+   initialization {
++    datastore_id      = "local-zfs"
++    user_data_file_id = proxmox_virtual_environment_file.cloud_config.id
++
+     ip_config {
+       ipv4 {
+         address = "dhcp"
+@@ -81,9 +78,6 @@ resource "proxmox_virtual_environment_vm" "k8s_worker_01" {
+   }
+
+   initialization {
++    datastore_id      = "local-zfs"
++    user_data_file_id = proxmox_virtual_environment_file.cloud_config.id
++
+     ip_config {
+       ipv4 {
+         address = "dhcp"
